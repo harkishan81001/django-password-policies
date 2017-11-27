@@ -1,30 +1,24 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 
-from password_policies.views import PasswordChangeFormView
-from password_policies.views import PasswordChangeDoneView
-from password_policies.views import PasswordResetCompleteView
-from password_policies.views import PasswordResetConfirmView
-from password_policies.views import PasswordResetFormView
-from password_policies.views import PasswordResetDoneView
+from password_policies import views as pp_views
 
-
-urlpatterns = patterns('',
-                       url(r'^change/done/$',
-                           PasswordChangeDoneView.as_view(),
-                           name="password_change_done"),
-                       url(r'^change/$',
-                           PasswordChangeFormView.as_view(),
-                           name="password_change"),
-                       url(r'^reset/$',
-                           PasswordResetFormView.as_view(),
-                           name="password_reset"),
-                       url(r'^reset/complete/$',
-                           PasswordResetCompleteView.as_view(),
-                           name="password_reset_complete"),
-                       url(r'^reset/confirm/([0-9A-Za-z_\-]+)/([0-9A-Za-z]{1,13})/([0-9A-Za-z-=_]{1,32})/$',
-                           PasswordResetConfirmView.as_view(),
-                           name="password_reset_confirm"),
-                       url(r'^reset/done/$',
-                           PasswordResetDoneView.as_view(),
-                           name="password_reset_done"),
-                       )
+urlpatterns = [
+   url(r'^change/done/$',
+       pp_views.PasswordChangeDoneView.as_view(),
+       name="password_change_done"),
+   url(r'^change/$',
+       pp_views.PasswordChangeFormView.as_view(),
+       name="password_change"),
+   url(r'^reset/$',
+       pp_views.PasswordResetFormView.as_view(),
+       name="password_reset"),
+   url(r'^reset/complete/$',
+       pp_views.PasswordResetCompleteView.as_view(),
+       name="password_reset_complete"),
+   url(r'^reset/confirm/([0-9A-Za-z_\-]+)/([0-9A-Za-z]{1,13})/([0-9A-Za-z-=_]{1,32})/$',
+       pp_views.PasswordResetConfirmView.as_view(),
+       name="password_reset_confirm"),
+   url(r'^reset/done/$',
+       pp_views.PasswordResetDoneView.as_view(),
+       name="password_reset_done"),
+]
